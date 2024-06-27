@@ -58,9 +58,12 @@ const Header = () => {
           </li>
         </ul>
         <div className="flex items-center gap-4">
-          {/* <Link href={"/login"}>
-            <Btn btnLabel={"Login"} />
-          </Link> */}
+          {session?.data?.user && (
+            <Link href={"/add-job"}>
+              <Btn btnLabel={"Post New Job"} />
+            </Link>
+          )}
+
           {session?.data?.user?.photo ? (
             <div className="relative">
               <div className="inline-flex items-center overflow-hidden rounded-full p-1 border border-slate-50/10 ">
@@ -117,7 +120,6 @@ const Header = () => {
             </Link>
           )}
 
-          {/* <Btn btnLabel={"Post New Job"} /> */}
           <button
             className="md:hidden"
             onClick={() => setIsOpenMenu(!isOpenMenu)}

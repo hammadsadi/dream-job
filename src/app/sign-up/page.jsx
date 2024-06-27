@@ -34,8 +34,14 @@ const Signup = () => {
     setLoading(true);
     const formData = new FormData();
     formData.append("file", photo);
-    formData.append("upload_preset", "dreamjob");
-    formData.append("cloud_name", "dq1ey5jg1");
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+    );
+    formData.append(
+      "cloud_name",
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+    );
 
     try {
       const res = await axios.post(
