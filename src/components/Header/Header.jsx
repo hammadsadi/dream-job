@@ -17,7 +17,7 @@ const Header = () => {
   if (pathName === "/login" || pathName === "/sign-up") {
     return null;
   }
-  console.log(session?.data?.user?.photo);
+
   return (
     <div className="py-4 shadow-xl ">
       <nav className="container px-4 md:px-0 mx-auto flex justify-between items-center relative ">

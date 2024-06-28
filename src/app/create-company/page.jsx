@@ -1,8 +1,32 @@
 "use client";
+
+import { toastAlert } from "@/helper/helper";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 const CreateCompany = () => {
+  const session = useSession();
+
+  const router = useRouter();
   // handleCreateCompany
   const handleCreateCompany = async (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
+    const companyInfo = {
+      name: name,
+      ownerName: session?.data?.user?.name,
+      ownerEmail: session?.data?.user?.email,
+    };
+    const { data } = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/company`,
+      companyInfo
+    );
+    if (data.res.insertedId) {
+      toastAlert("Company Created Successful", "success");
+      e.target.reset();
+      router.push("/add-job");
+    }
   };
   return (
     <div className="w-full h-[calc(100vh-214px)] flex justify-center items-center">
@@ -27,6 +51,7 @@ const CreateCompany = () => {
           </div>
 
           <button
+            type="submit"
             className={`w-full p-3 text-center rounded-sm text-white hover:bg-slate-50/10 border border-slate-50/10 flex justify-center items-center gap-1`}
           >
             Create
