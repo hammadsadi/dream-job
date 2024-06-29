@@ -17,7 +17,6 @@ const AddCompany = () => {
     const { data } = await axios.get(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/company/${session?.data?.user?.email}`
     );
-    console.log("from ap", data);
     setCompanyList(data.res);
   };
 
@@ -25,7 +24,6 @@ const AddCompany = () => {
     getAllCompanies();
   }, [session?.data]);
 
-  console.log(companyList);
   return (
     <div className="flex flex-col text-left gap-3">
       {companyList.length === 0 ? (

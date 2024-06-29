@@ -1,5 +1,5 @@
 "use client";
-import { toastAlert } from "@/helper/helper";
+import { toastAlert, uploadImageToCloudinary } from "@/helper/helper";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,22 +32,10 @@ const Signup = () => {
 
     // Upload Image to Cloudinary
     setLoading(true);
-    const formData = new FormData();
-    formData.append("file", photo);
-    formData.append(
-      "upload_preset",
-      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-    );
-    formData.append(
-      "cloud_name",
-      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-    );
 
     try {
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dq1ey5jg1/image/upload",
-        formData
-      );
+      const res = await uploadImageToCloudinary(photo);
+      console.log(res);
       // console.log(res.data.url);
       if (res.data.url) {
         // User Info
