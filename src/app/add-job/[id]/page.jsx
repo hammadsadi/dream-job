@@ -69,6 +69,7 @@ const CreateJob = () => {
             userName: session?.data?.user?.name,
             userEmail: session?.data?.user?.email,
           },
+          createdDate: new Date(),
         };
         // Send data To DB
         const resData = await axios.post(
@@ -181,7 +182,7 @@ const CreateJob = () => {
                 <div>
                   <input type="radio" name="workTime" value="full-time" />
                   &nbsp;
-                  <label for="hybrid">Full-Rime</label>
+                  <label for="hybrid">Full-Time</label>
                 </div>
               </div>
 

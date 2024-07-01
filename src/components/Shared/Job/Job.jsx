@@ -1,8 +1,10 @@
+import { timeAgo } from "@/helper/helper";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { IoMdHeart } from "react-icons/io";
 
-const Job = () => {
+const Job = ({ data }) => {
   return (
     // <div className="p-4 bg-[#09090B] rounded-md">
     //   <div className="flex gap-4">
@@ -38,9 +40,7 @@ const Job = () => {
       <div className="flex md:flex-row flex-col  gap-4">
         <div>
           <Image
-            src={
-              "https://static-00.iconduck.com/assets.00/spotify-icon-2048x2048-3js5gsei.png"
-            }
+            src={data?.logo}
             width={100}
             height={100}
             alt={"title"}
@@ -49,13 +49,19 @@ const Job = () => {
         </div>
         <div className="flex flex-col justify-between flex-1">
           <h5 className="text-gray-300 text-sm">Spotify</h5>
-          <h2 className="text-xl md:text-2xl font-bold">
-            Lorem ipsum dolor sit amet.
-          </h2>
+          <Link
+            href={`/jobs/${data._id}`}
+            className="text-xl md:text-2xl font-bold hover:underline"
+          >
+            {data?.jobTitle}
+          </Link>
           <div className="flex flex-row gap-1 text-sm text-gray-300">
-            <p>Remote </p> &middot;
-            <p>California, US</p> &middot;
-            <p>Full Time </p>
+            <p>{data?.jobType} </p> &middot;
+            <p>
+              {data?.state},{data?.country}
+            </p>{" "}
+            &middot;
+            <p>{data?.workTime} </p>
           </div>
         </div>
 
@@ -63,7 +69,10 @@ const Job = () => {
           <p>
             <IoMdHeart className={`text-slate-50/10 text-xl cursor-pointer `} />
           </p>
-          <p className="text-sm text-gray-300">2 weeks </p>
+          <p className="text-sm text-gray-300">
+            {" "}
+            {timeAgo(data?.createdDate)}{" "}
+          </p>
         </div>
       </div>
     </div>
